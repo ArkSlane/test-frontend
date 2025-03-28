@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Locator Manager - Datei Upload</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    form { margin-bottom: 1em; }
+    label { display: block; margin-top: 1em; }
+    #result { margin-top: 1em; color: green; }
+  </style>
+</head>
+<body>
+  <h1>Datei in ein Repository hochladen</h1>
+  <form id="uploadForm">
+    <label for="repoId">Repository-ID:</label>
+    <input type="text" id="repoId" name="repoId" placeholder="z.B. mein_repo" required />
+
+    <label for="file">Datei auswählen:</label>
+    <input type="file" id="file" name="file" required />
+
+    <button type="submit">Datei hochladen</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const repoId = document.getElementById('repoId').value;
+      const fileInput = document.getElementById('file');
+      const file = fileInput.files[0];
+      
+      if (!repoId || !file) {
+        alert("Bitte geben Sie eine Repository-ID an und wählen Sie eine Datei aus.");
+        return;
+      }
+      
+      const formData = new FormData();
+      formData.append('repoId', repoId);
+      formData.append('file', file);
+      
+      try {
+        const response = await fetch('/uploadFile', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const result = await response.json();
+        document.getElementById('result').innerText = "Upload erfolgreich: " + JSON.stringify(result);
+      } catch (error) {
+        console.error('Fehler beim Upload:', error);
+        document.getElementById('result').innerText = "Fehler beim Upload.";
+      }
+    });
+  </script>
+</body>
+</html>
