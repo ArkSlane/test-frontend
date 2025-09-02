@@ -1,0 +1,13 @@
+wdpWindow("HPE MyFlight Sample Application").WpfEdit("agentName").Set "john"
+wdpWindow("HPE MyFlight Sample Application").WpfEdit("password").SetSecure "545646546"
+wdpWindow("HPE MyFlight Sample Application").WpButton("OK").Click
+wdpWindow("HPE MyFlight Sample Application").WpfComboBox("fromCity").Select "Paris"
+wdpWindow("HPE MyFlight Sample Application").WpfComboBox("toCity").Select "London"
+wdpWindow("HPE MyFlight Sample Application").WpfComboBox("Class").Select "Business"
+wdpWindow("HPE MyFlight Sample Application").WpfComboBox("numOfTickets").Select "4"
+wdpWindow("HPE MyFlight Sample Application").WpfButton("FIND FLIGHTS").Click
+wdpWindow("HPE MyFlight Sample Application").WpfTable("flightsDataGrid").SelectCell 2,1
+wdpWindow("HPE MyFlight Sample Application").WpfButton("SELECT FLIGHT").Click
+wdpWindow("HPE MyFlight Sample Application").WpfEdit("passengerName").Set "Raj"
+wdpWindow("HPE MyFlight Sample Application").WpfButton("ORDER").Click
+wdpWindow("HPE MyFlight Sample Application").Close
